@@ -35,7 +35,7 @@ fun Option(
     }
     Box(
         modifier = Modifier
-            .height(48.dp)
+            .height(56.dp)
             .padding(horizontal = 12.dp, vertical = 2.dp)
             .clickable(enabled = !isOptionClicked) {
                 isOptionClicked = true
