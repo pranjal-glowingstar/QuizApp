@@ -42,31 +42,6 @@ Coroutines: For asynchronous and concurrent programming, handling network reques
 
 JUnit: For writing unit tests.
 
-📂 Project Structure
-com.apps.quiz
-├── data.remote
-│   ├── models
-│   │   └── QuizModel.kt      // Data model for API response
-│   └── QuizApi.kt          // Retrofit API interface
-├── di
-│   └── QuizModule.kt       // Hilt module for dependency injection
-├── presentation
-│   ├── composables
-│   │   ├── MainScreen.kt   // Main UI for the quiz
-│   │   ├── Option.kt       // Composable for quiz options
-│   │   └── ResultScreen.kt // Screen to display results
-│   ├── models
-│   │   └── OptionModel.kt
-│   └── viewmodel
-│       └── MainViewModel.kt  // ViewModel for managing UI state
-├── repository.remote
-│   ├── IQuizRepository.kt      // Interface for the data repository
-│   └── QuizRepositoryImpl.kt     // Implementation of the repository
-├── ui.theme
-│   └── ...                 // Composable theme, colors, typography
-└── utils
-    ├── AppConstants.kt     // Application-wide constants
-    └── DispatcherProvider.kt // Wrapper for coroutine dispatchers
 🌐 API
 The application fetches quiz questions from the following API endpoint: https://gist.githubusercontent.com
 
