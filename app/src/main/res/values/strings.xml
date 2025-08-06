@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Quiz</string>
+    <string name="error">Unable to load the quiz. Please try later :(</string>
+    <string name="skip">Skip</string>
+    <string name="streak">Streak:</string>
+    <string name="results">Quiz Results</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="summary">You have completed the quiz. Here is your performance summary:</string>
+    <string name="correct">Correct Answers:</string>
+    <string name="total">Total Questions:</string>
+    <string name="longest_streak">Longest Streak:</string>
+    <string name="restart">Restart</string>
+    <string name="wait">Loading next question, please wait</string>
 </resources>

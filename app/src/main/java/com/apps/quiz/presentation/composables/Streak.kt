@@ -22,15 +22,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.apps.quiz.R
 
 @Composable
 fun Streak(streak: Int, currentQuestion: Int, totalQuestions: Int){
+    val context = LocalContext.current
     var animate by remember { mutableStateOf(false) }
     val scale: Float by animateFloatAsState(
         targetValue = if (animate) 1.5f else 1f,
         animationSpec = tween(
-            durationMillis = 2000
+            durationMillis = 1000
         )
     )
     LaunchedEffect(streak) {
@@ -43,7 +46,7 @@ fun Streak(streak: Int, currentQuestion: Int, totalQuestions: Int){
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(text = "Streak:- $streak")
+        Text(text = "${context.getString(R.string.streak)} $streak")
         if(streak >= 3){
             Icon(imageVector = Icons.Filled.Star, contentDescription = "", modifier = Modifier.size(24.dp*scale), tint = Color(0xffffbf00))
             LaunchedEffect(scale) {

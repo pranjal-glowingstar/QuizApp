@@ -35,7 +35,7 @@ fun Option(
     }
     Box(
         modifier = Modifier
-            .height(36.dp)
+            .height(48.dp)
             .padding(horizontal = 12.dp, vertical = 2.dp)
             .clickable(enabled = !isOptionClicked) {
                 isOptionClicked = true
@@ -56,7 +56,9 @@ fun Option(
         contentAlignment = Alignment.Center) {
         Text(
             text = option,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+            maxLines = 2
         )
     }
 }

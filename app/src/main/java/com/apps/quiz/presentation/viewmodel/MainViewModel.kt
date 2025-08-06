@@ -29,6 +29,7 @@ class MainViewModel @Inject constructor(private val quizRepository: IQuizReposit
     private val _optionState = MutableStateFlow(OptionModel())
     private val _correctAnswers = MutableStateFlow(0)
     private val _uiState: MutableStateFlow<QuizUiState> = MutableStateFlow(QuizUiState.None)
+    private val _shouldWaitForNextQuestion = MutableStateFlow(false)
 
 
     val quizQuestion = _quizQuestion.asStateFlow()
@@ -37,6 +38,7 @@ class MainViewModel @Inject constructor(private val quizRepository: IQuizReposit
     val optionModel = _optionState.asStateFlow()
     val correctAnswers = _correctAnswers.asStateFlow()
     val uiState = _uiState.asStateFlow()
+    val shouldWaitForNextQuestion = _shouldWaitForNextQuestion.asStateFlow()
 
     fun getRandomQuizQuestions() {
         viewModelScope.launch(DispatcherProvider.getIODispatcher()) {
@@ -48,18 +50,21 @@ class MainViewModel @Inject constructor(private val quizRepository: IQuizReposit
                         quizList = body as MutableList<QuizModel>
                         currentQuestion = 0
                         _quizQuestion.value = quizList[currentQuestion]
+                        _uiState.value = QuizUiState.Question
                     } ?: run{
                         _uiState.value = QuizUiState.Error
                     }
+                }else{
+                    _uiState.value = QuizUiState.Error
                 }
             }catch (e: Exception){
                 Log.d("Exception in network call", e.message ?: "")
                 _uiState.value = QuizUiState.Error
             }
-            _uiState.value = QuizUiState.InProgress
         }
     }
     fun onOptionClicked(selectedOption: Int, correctOption: Int){
+        _shouldWaitForNextQuestion.value = true
         if(selectedOption == correctOption){
             _streak.value++
             _correctAnswers.value++
@@ -90,6 +95,7 @@ class MainViewModel @Inject constructor(private val quizRepository: IQuizReposit
         getRandomQuizQuestions()
     }
     fun moveToNextQuestionOrShowResult(){
+        _shouldWaitForNextQuestion.value = false
         if(quizList.size <= currentQuestion + 1){
             _uiState.value = QuizUiState.Result
         }else{
@@ -103,6 +109,6 @@ sealed class QuizUiState{
     data object Loader: QuizUiState()
     data object Error: QuizUiState()
     data object Result: QuizUiState()
-    data object InProgress: QuizUiState()
+    data object Question: QuizUiState()
     data object None: QuizUiState()
 }
