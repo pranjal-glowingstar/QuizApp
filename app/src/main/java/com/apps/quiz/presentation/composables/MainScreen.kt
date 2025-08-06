@@ -125,7 +125,7 @@ fun MainScreen(viewModel: MainViewModel) {
                         onClick = { viewModel.moveToNextQuestionOrShowResult() }, modifier = Modifier
                             .height(36.dp)
                             .fillMaxWidth()
-                            .padding(horizontal = 12.dp)
+                            .padding(horizontal = 12.dp), enabled = !shouldWaitForNextQuestion
                     ) {
                         Text(
                             text = context.getString(R.string.skip)
