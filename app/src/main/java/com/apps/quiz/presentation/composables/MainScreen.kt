@@ -68,7 +68,7 @@ fun MainScreen(viewModel: MainViewModel) {
             }
 
             QuizUiState.Error -> {
-                Text(text = context.getString(R.string.error))
+                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) { Text(text = context.getString(R.string.error), textAlign = TextAlign.Center) }
             }
 
             QuizUiState.Result -> {
